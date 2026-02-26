@@ -16,14 +16,14 @@ spring:
       server:
         webmvc:
           routes:
-            - id: user
-              uri: http://localhost:8081/ #endpoint
+            - id: user-service
+              uri: lb://USER-SERVICE #endpoint -> loadbalancing
               predicates: Path=/user/**
             - id: first-service
-              uri: http://localhost:8083/ #endpoint
+              uri: lb://FIRST-SERVICE #endpoint
               predicates: Path=/first-service/**
             - id: second-service
-              uri: http://localhost:8084/ #endpoint
+              uri: lb://SECOND-SERVICE #endpoint
               predicates: Path=/second-service/**
 
 
