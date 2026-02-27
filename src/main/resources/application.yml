@@ -19,6 +19,12 @@ spring:
             - id: user-service
               uri: lb://USER-SERVICE #endpoint -> loadbalancing
               predicates: Path=/user/**
+            - id: order-service
+              uri: lb://ORDER-SERVICE #endpoint -> loadbalancing
+              predicates: Path=/order/**
+            - id: product-service
+              uri: lb://PRODUCT-SERVICE #endpoint -> loadbalancing
+              predicates: Path=/product/**
             - id: first-service
               uri: lb://FIRST-SERVICE #endpoint
               predicates: Path=/first-service/**
