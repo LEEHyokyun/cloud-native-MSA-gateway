@@ -2,6 +2,9 @@ server:
   port: 8000 #Spring Cloud - Eureka 기본 서버포트
 
 eureka:
+  instance:
+    instance-id: ${spring.application.name}
+    hostname: localhost
   client:
     register-with-eureka: true #Cluster 환경에서 본인의 서버 주소를 default 도메인의 다른 서버에 본인의 주소를 알림, 단일 서버에서는 false
     fetch-registry: true #메모리에 올려진 레지스트리 목록을 주기적으로 갱신, 클러스터 환경일 경우 true 필요
@@ -25,12 +28,6 @@ spring:
             - id: product-service
               uri: lb://PRODUCT-SERVICE #endpoint -> loadbalancing
               predicates: Path=/product/**
-            - id: first-service
-              uri: lb://FIRST-SERVICE #endpoint
-              predicates: Path=/first-service/**
-            - id: second-service
-              uri: lb://SECOND-SERVICE #endpoint
-              predicates: Path=/second-service/**
 
 
 #  datasource:
