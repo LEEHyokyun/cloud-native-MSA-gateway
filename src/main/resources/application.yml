@@ -21,16 +21,26 @@ spring:
           routes:
             - id: user-service
               uri: lb://USER-SERVICE #endpoint -> loadbalancing
-              predicates: Path=/user/**
+              predicates:
+                - Path=/user/**  #prefix
+              filters:
+                - RewritePath=/user/(?<segment>.*), /$\{segment} #rewrite
+
             - id: order-service
               uri: lb://ORDER-SERVICE #endpoint -> loadbalancing
-              predicates: Path=/order/**
+              predicates:
+                - Path=/order/**
+              filters:
+                - RewritePath=/order/(?<segment>.*), /$\{segment} #rewrite
+
             - id: product-service
               uri: lb://PRODUCT-SERVICE #endpoint -> loadbalancing
-              predicates: Path=/product/**
+              predicates:
+                - Path=/product/**
+              filters:
+                - RewritePath=/product/(?<segment>.*), /$\{segment} #rewrite
 
-
-#  datasource:
+  #  datasource:
 #    url: jdbc:postgresql://localhost:5432/root
 #    driver-class-name: org.postgresql.Driver
 #    username: root
